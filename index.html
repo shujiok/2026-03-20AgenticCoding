@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ハノイの塔キッズラボ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&family=Yusei+Magic&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="bg-shape bg-shape-a" aria-hidden="true"></div>
+  <div class="bg-shape bg-shape-b" aria-hidden="true"></div>
+  <div id="clearFx" class="clear-fx" aria-hidden="true">
+    <div class="clear-pop" role="status" aria-live="polite">
+      <p class="clear-label">MISSION COMPLETE</p>
+      <h2>クリア！</h2>
+      <p>ぜんぶ右の棒にお引っ越しできたね！</p>
+      <button id="playAgainButton" class="btn btn-primary" type="button">もう1回あそぶ</button>
+      <div id="confettiLayer" class="confetti-layer" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <main class="app">
+    <header class="hero">
+      <p class="hero-tag">パズルで算数脳をきたえよう</p>
+      <h1>ハノイの塔 キッズラボ</h1>
+      <p class="hero-lead">ルールは3つだけ。ぜんぶ右の棒へお引っ越しできるかな？</p>
+    </header>
+
+    <section class="control-panel">
+      <div class="row">
+        <label for="diskCount">円盤の枚数: <span id="diskCountValue">3</span> まい</label>
+        <input id="diskCount" type="range" min="3" max="7" value="3">
+      </div>
+      <div class="buttons">
+        <button id="resetButton" class="btn btn-secondary" type="button">最初から</button>
+        <button id="autoSolveButton" class="btn btn-primary" type="button">お手本を再生</button>
+        <button id="stopButton" class="btn btn-warning" type="button" disabled>停止</button>
+      </div>
+      <div class="stats">
+        <p>今の手数: <strong id="moveCount">0</strong></p>
+        <p>最短手数: <strong id="minimumMoves">7</strong></p>
+      </div>
+      <p id="statusMessage" class="status" aria-live="polite">左の棒をクリックしてスタート！</p>
+    </section>
+
+    <section class="board" aria-label="ハノイの塔の盤面">
+      <button class="peg" data-peg="0" aria-label="左の棒">
+        <span class="peg-name">左</span>
+        <div class="rod"></div>
+        <div class="disk-stack" id="stack-0"></div>
+      </button>
+      <button class="peg" data-peg="1" aria-label="真ん中の棒">
+        <span class="peg-name">中</span>
+        <div class="rod"></div>
+        <div class="disk-stack" id="stack-1"></div>
+      </button>
+      <button class="peg" data-peg="2" aria-label="右の棒">
+        <span class="peg-name">右</span>
+        <div class="rod"></div>
+        <div class="disk-stack" id="stack-2"></div>
+      </button>
+    </section>
+
+    <section class="lesson-card">
+      <h2>ルールはこの3つ</h2>
+      <ol>
+        <li>1回に動かせる円盤は1まいだけ</li>
+        <li>小さい円盤の上に大きい円盤は置けない</li>
+        <li>全部の円盤を右の棒へ運べたらクリア</li>
+      </ol>
+      <p class="tip">最短手数は <span id="formulaText">2^3 - 1 = 7</span>。枚数が1ふえると、手数はほぼ2倍になるよ。</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
