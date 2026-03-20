@@ -8,6 +8,9 @@ const statusMessageEl = document.getElementById("statusMessage");
 const resetButton = document.getElementById("resetButton");
 const autoSolveButton = document.getElementById("autoSolveButton");
 const stopButton = document.getElementById("stopButton");
+const clearFxEl = document.getElementById("clearFx");
+const confettiLayerEl = document.getElementById("confettiLayer");
+const playAgainButton = document.getElementById("playAgainButton");
 
 const pegButtons = Array.from(document.querySelectorAll(".peg"));
 const stackEls = [
@@ -24,16 +27,16 @@ let isAutoSolving = false;
 let autoStopRequested = false;
 let dragSourcePeg = null;
 let suppressClickUntil = 0;
+let clearFxTimeoutId = null;
+let hasCleared = false;
 
-const diskColors = [
-  "#ff7a32",
-  "#00a878",
-  "#2f66ff",
-  "#f25f5c",
-  "#3f88c5",
-  "#8f4fff",
-  "#f6aa1c"
-];
+function getDiskGradient(diskSize, totalDisks) {
+  const ratio = (diskSize - 1) / Math.max(1, totalDisks - 1);
+  const hue = Math.round(270 * ratio);
+  const lightHue = (hue + 8) % 360;
+  const darkHue = (hue + 22) % 360;
+  return `linear-gradient(135deg, hsl(${lightHue} 96% 70%), hsl(${darkHue} 88% 50%))`;
+}
 
 function sleep(ms) {
   return new Promise((resolve) => {
@@ -53,6 +56,43 @@ function updateMathPanel() {
 
 function setStatusMessage(message) {
   statusMessageEl.textContent = message;
+}
+
+function hideClearEffect() {
+  if (clearFxTimeoutId !== null) {
+    clearTimeout(clearFxTimeoutId);
+    clearFxTimeoutId = null;
+  }
+
+  clearFxEl.classList.remove("active");
+  clearFxEl.setAttribute("aria-hidden", "true");
+  confettiLayerEl.innerHTML = "";
+}
+
+function launchClearEffect() {
+  clearFxEl.classList.add("active");
+  clearFxEl.setAttribute("aria-hidden", "false");
+  confettiLayerEl.innerHTML = "";
+
+  const confettiColors = ["#ff7a32", "#ffd447", "#00a878", "#2f66ff", "#ff4d8b", "#6f44ff"];
+  for (let i = 0; i < 84; i += 1) {
+    const piece = document.createElement("span");
+    piece.className = "confetti";
+    piece.style.setProperty("--x", `${Math.floor(Math.random() * 100)}%`);
+    piece.style.setProperty("--delay", `${Math.floor(Math.random() * 300)}ms`);
+    piece.style.setProperty("--dur", `${1200 + Math.floor(Math.random() * 900)}ms`);
+    piece.style.setProperty("--c", confettiColors[i % confettiColors.length]);
+    piece.style.width = `${7 + Math.floor(Math.random() * 6)}px`;
+    piece.style.height = `${11 + Math.floor(Math.random() * 10)}px`;
+    confettiLayerEl.appendChild(piece);
+  }
+
+  if (clearFxTimeoutId !== null) {
+    clearTimeout(clearFxTimeoutId);
+  }
+  clearFxTimeoutId = setTimeout(() => {
+    hideClearEffect();
+  }, 2800);
 }
 
 function clearSelection() {
@@ -76,7 +116,7 @@ function renderBoard() {
       const diskEl = document.createElement("div");
       diskEl.className = "disk";
       diskEl.style.width = `${36 + (diskSize * 14)}px`;
-      diskEl.style.background = diskColors[(diskSize - 1) % diskColors.length];
+      diskEl.style.background = getDiskGradient(diskSize, diskCount);
       diskEl.setAttribute("aria-label", `大きさ${diskSize}の円盤`);
 
       const isTopDisk = diskIndex === (pegs[pegIndex].length - 1);
@@ -105,7 +145,9 @@ function initializeGame() {
   }
 
   moveCount = 0;
+  hasCleared = false;
   clearSelection();
+  hideClearEffect();
   renderBoard();
   setStatusMessage("左の棒をクリックしてスタート！");
 }
@@ -133,7 +175,13 @@ function checkClear() {
     return false;
   }
 
+  if (hasCleared) {
+    return true;
+  }
+
+  hasCleared = true;
   setStatusMessage("クリア！ すごい！ぜんぶ右に運べたね！");
+  launchClearEffect();
   return true;
 }
 
@@ -149,9 +197,9 @@ function moveDisk(from, to, fromAuto = false) {
   pegs[to].push(disk);
   moveCount += 1;
   renderBoard();
-  checkClear();
+  const cleared = checkClear();
 
-  if (!fromAuto) {
+  if (!fromAuto && !cleared) {
     setStatusMessage(`移動OK！ 手数は ${moveCount} 回だよ。`);
   }
 
@@ -374,6 +422,14 @@ autoSolveButton.addEventListener("click", () => {
 
 stopButton.addEventListener("click", () => {
   autoStopRequested = true;
+});
+
+playAgainButton.addEventListener("click", () => {
+  if (isAutoSolving) {
+    return;
+  }
+
+  initializeGame();
 });
 
 initializeGame();
