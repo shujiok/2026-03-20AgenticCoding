@@ -1,0 +1,318 @@
+:root {
+  --bg-top: #fff4d8;
+  --bg-bottom: #d8f3ff;
+  --paper: rgba(255, 255, 255, 0.82);
+  --ink: #17324d;
+  --accent: #ff7a32;
+  --accent-2: #00a878;
+  --accent-3: #2f66ff;
+  --warn: #d1495b;
+  --shadow: 0 12px 28px rgba(18, 46, 78, 0.16);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  color: var(--ink);
+  background: linear-gradient(165deg, var(--bg-top), var(--bg-bottom));
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.bg-shape {
+  position: fixed;
+  border-radius: 999px;
+  filter: blur(1px);
+  z-index: -1;
+  opacity: 0.7;
+}
+
+.bg-shape-a {
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle at 35% 35%, #ffe05b, #ff8f70);
+  top: -100px;
+  right: -70px;
+  animation: drift 9s ease-in-out infinite alternate;
+}
+
+.bg-shape-b {
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle at 40% 30%, #86d9ff, #4dc79f);
+  bottom: -130px;
+  left: -120px;
+  animation: drift 12s ease-in-out infinite alternate-reverse;
+}
+
+.app {
+  width: min(1040px, 94vw);
+  margin: 1.2rem auto 2rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.hero,
+.control-panel,
+.lesson-card,
+.board {
+  background: var(--paper);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(4px);
+}
+
+.hero {
+  padding: 1.2rem 1.4rem;
+  animation: popin 500ms ease;
+}
+
+.hero-tag {
+  margin: 0;
+  font-weight: 800;
+  color: var(--accent-2);
+}
+
+h1,
+h2 {
+  font-family: "Yusei Magic", sans-serif;
+  margin: 0.2rem 0;
+}
+
+.hero h1 {
+  font-size: clamp(1.7rem, 4.2vw, 2.5rem);
+}
+
+.hero-lead {
+  margin: 0.25rem 0 0;
+}
+
+.control-panel {
+  padding: 1rem 1.2rem;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+input[type="range"] {
+  width: min(460px, 95%);
+  accent-color: var(--accent-3);
+}
+
+.buttons {
+  margin-top: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 160ms ease, filter 160ms ease;
+}
+
+.btn:hover:enabled {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--accent-3);
+  color: #fff;
+}
+
+.btn-secondary {
+  background: #fff;
+  color: var(--ink);
+  border: 2px solid #d7e5ff;
+}
+
+.btn-warning {
+  background: var(--warn);
+  color: #fff;
+}
+
+.stats {
+  margin-top: 0.7rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+.stats p {
+  margin: 0;
+}
+
+.status {
+  margin: 0.7rem 0 0;
+  min-height: 1.6em;
+  font-weight: 700;
+}
+
+.board {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(90px, 1fr));
+  gap: 0.75rem;
+  align-items: end;
+  min-height: 360px;
+}
+
+.peg {
+  position: relative;
+  border: 2px solid #d7e5ff;
+  border-radius: 16px;
+  min-height: 315px;
+  background: linear-gradient(180deg, #f7fbff, #ecf4ff);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0.7rem 0.2rem;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.peg.selected {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 2px rgba(255, 122, 50, 0.25);
+}
+
+.peg-name {
+  position: absolute;
+  top: 0.55rem;
+  font-weight: 800;
+}
+
+.rod {
+  position: absolute;
+  bottom: 24px;
+  width: 12px;
+  height: 220px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffcc7c, #ff9354);
+  z-index: 1;
+}
+
+.disk-stack {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  min-height: 245px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+  padding-bottom: 10px;
+}
+
+.disk {
+  height: 25px;
+  border-radius: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+  animation: rise 220ms ease;
+  cursor: grab;
+}
+
+.disk:active {
+  cursor: grabbing;
+}
+
+.disk.top-draggable {
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.16);
+}
+
+.disk.dragging {
+  opacity: 0.7;
+}
+
+.peg.drop-target {
+  border-color: var(--accent-2);
+  box-shadow: inset 0 0 0 2px rgba(0, 168, 120, 0.28);
+}
+
+.lesson-card {
+  padding: 1rem 1.2rem;
+}
+
+.lesson-card ol {
+  margin-top: 0.55rem;
+  margin-bottom: 0.65rem;
+  padding-left: 1.2rem;
+}
+
+.tip {
+  margin: 0;
+  font-weight: 700;
+  color: #01546f;
+}
+
+@keyframes drift {
+  from {
+    transform: translateY(0px) translateX(0px);
+  }
+  to {
+    transform: translateY(16px) translateX(12px);
+  }
+}
+
+@keyframes popin {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 740px) {
+  .board {
+    min-height: 290px;
+  }
+
+  .peg {
+    min-height: 245px;
+  }
+
+  .rod {
+    height: 160px;
+  }
+
+  .disk {
+    height: 21px;
+  }
+}
