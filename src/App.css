@@ -1,0 +1,131 @@
+.app {
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.app-container {
+  background-color: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 1200px;
+  width: 100%;
+}
+
+.app h1 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+  text-align: center;
+  font-size: 2.5rem;
+}
+
+.subtitle {
+  text-align: center;
+  color: #666;
+  margin: 0 0 1.5rem 0;
+  font-size: 1.1rem;
+}
+
+.game-area {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  align-items: start;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.reset-button {
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(135deg, #4ecdc4, #44b39d);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 12px rgba(78, 205, 196, 0.3);
+}
+
+.reset-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(78, 205, 196, 0.4);
+}
+
+.reset-button:active {
+  transform: translateY(0);
+}
+
+.rules {
+  background-color: #f5f5f5;
+  border-left: 4px solid #4ecdc4;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.rules h2 {
+  margin: 0 0 1rem 0;
+  color: #333;
+  font-size: 1.3rem;
+}
+
+.rules ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  color: #666;
+  line-height: 1.8;
+}
+
+.rules li {
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    padding: 1.5rem;
+  }
+
+  .app h1 {
+    font-size: 1.8rem;
+  }
+
+  .game-area {
+    grid-template-columns: 1fr;
+  }
+
+  .difficulty-selector {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .difficulty-selector select {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .app {
+    padding: 1rem;
+  }
+
+  .app-container {
+    padding: 1rem;
+  }
+
+  .app h1 {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+}

@@ -1,0 +1,35 @@
+.disk {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  border-radius: 8px;
+  cursor: grab;
+  user-select: none;
+  margin: 0 auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.disk:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.disk:active {
+  cursor: grabbing;
+}
+
+.disk-label {
+  font-size: 18px;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+/* ドラッグ中のスタイル */
+.disk[dragging="true"] {
+  opacity: 0.7;
+}

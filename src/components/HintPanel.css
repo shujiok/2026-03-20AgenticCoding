@@ -1,0 +1,147 @@
+.hint-panel {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border: 2px solid #4ecdc4;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 4px 12px rgba(78, 205, 196, 0.15);
+}
+
+.hint-panel__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #4ecdc4;
+}
+
+.hint-panel__title {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #255e5e;
+  font-weight: 700;
+}
+
+.hint-panel__usage-count {
+  font-size: 0.9rem;
+  color: #566a6d;
+}
+
+.hint-panel__usage-count strong {
+  color: #4ecdc4;
+  font-weight: 700;
+}
+
+.hint-panel__content {
+  min-height: 60px;
+  margin-bottom: 16px;
+  padding: 12px;
+  background: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.hint-panel__message {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #2c5f5f;
+  line-height: 1.5;
+}
+
+.hint-panel__placeholder {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #999;
+  font-style: italic;
+}
+
+.hint-panel__controls {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.hint-panel__button {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hint-panel__button--next {
+  background: #4ecdc4;
+  color: white;
+}
+
+.hint-panel__button--next:hover:not(:disabled) {
+  background: #3ab5ab;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(78, 205, 196, 0.3);
+}
+
+.hint-panel__button--next:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.hint-panel__button--reset {
+  background: #f0ad4e;
+  color: white;
+}
+
+.hint-panel__button--reset:hover:not(:disabled) {
+  background: #ec971f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(240, 173, 78, 0.3);
+}
+
+.hint-panel__button--reset:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.hint-panel__level-indicator {
+  padding: 8px 0;
+}
+
+.hint-panel__level-bar {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.hint-panel__level-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ddd;
+  transition: all 0.3s ease;
+}
+
+.hint-panel__level-dot--active {
+  background: #4ecdc4;
+  box-shadow: 0 0 8px rgba(78, 205, 196, 0.5);
+}
+
+@media (max-width: 768px) {
+  .hint-panel {
+    padding: 16px;
+  }
+
+  .hint-panel__title {
+    font-size: 1rem;
+  }
+
+  .hint-panel__button {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+}

@@ -1,24 +1,42 @@
-# 2026-03-20AgenticCoding
+# React + Vite + TypeScript Bootstrap
 
-小学生向けの「ハノイの塔」学習Webアプリです。
+Minimal bootstrap repository with the following stack:
 
-## できること
+- Node.js v24 via `.nvmrc`
+- React 19
+- Vite 6
+- TypeScript strict mode
+- Biome (linter/formatter)
+- Vitest (test + coverage)
 
-- 円盤の枚数を変えて挑戦できる
-- 棒をクリックして自分で動かせる
-- ルール違反をやさしく案内してくれる
-- 最短手数と現在手数を見比べられる
-- 自動で解くアニメーションを見られる
+## Requirements
 
-## 使い方
+- Node.js v24
+- npm 10+
 
-1. `index.html` をブラウザで開く
-2. 円盤の枚数を選ぶ
-3. 棒を2回クリックして円盤を移動する
-4. 「お手本を再生」で自動解法を見る
+## Setup
 
-## ファイル構成
+1. Install and use Node.js v24:
 
-- `index.html` : 画面構成
-- `styles.css` : 見た目とアニメーション
-- `script.js` : ゲームロジックと自動解法
+	nvm use
+
+2. Install dependencies:
+
+	npm install
+
+## Scripts
+
+- `npm run dev` - start Vite dev server
+- `npm run build` - run typecheck and build production assets
+- `npm run typecheck` - run strict TypeScript checks
+- `npm run lint` - run Biome checks
+- `npm run lint:fix` - run Biome auto-fixes
+- `npm run test` - run Vitest in watch mode
+- `npm run test:coverage` - run Vitest with coverage output
+
+## Project Structure
+
+- `src/` - application source files
+- `vite.config.ts` - Vite and Vitest configuration
+- `biome.json` - Biome formatter and linter configuration
+- `tsconfig*.json` - strict TypeScript configuration
